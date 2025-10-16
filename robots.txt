@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://sidybadji.github.io/sidy-badji-portfolio/sitemap.xml
+
+# Optimisations pour les moteurs de recherche
+Crawl-delay: 1
+
+# Autoriser l'indexation de tous les contenus publics
+Allow: /css/
+Allow: /js/
+Allow: /img/
+Allow: /projects/
+Allow: /cv/
+
+# Bloquer l'indexation des fichiers de développement
+Disallow: /scss/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /deploy.sh
+Disallow: /.htaccess

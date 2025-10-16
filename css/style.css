@@ -4,6 +4,14 @@
   --secondary: #314355;
   --light: #F2F2F2;
   --dark: #2C3E50;
+  --accent: #FF6B6B;
+  --success: #4ECDC4;
+  --warning: #FFE66D;
+  --info: #45B7D1;
+  --gradient-primary: linear-gradient(135deg, #00B87B 0%, #4ECDC4 100%);
+  --gradient-secondary: linear-gradient(135deg, #314355 0%, #2C3E50 100%);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 #spinner {
@@ -177,6 +185,47 @@
 
 .btn.btn-primary {
   color: #FFFFFF;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: 25px;
+  padding: 12px 30px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 184, 123, 0.3);
+}
+
+.btn.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 184, 123, 0.4);
+  background: var(--primary);
+}
+
+.btn.btn-secondary {
+  background: var(--gradient-secondary);
+  border: none;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.btn.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.btn.btn-outline-primary {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  background: transparent;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.btn.btn-outline-primary:hover,
+.btn.btn-outline-primary.active {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 184, 123, 0.3);
 }
 
 .typed-cursor {
@@ -258,18 +307,65 @@
 }
 
 .progress {
-  height: 5px;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .progress .progress-bar {
   width: 0px;
-  transition: 2s;
+  transition: all 2s ease-in-out;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress .progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 20px 20px;
+  animation: progress-stripes 1s linear infinite;
+}
+
+@keyframes progress-stripes {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 20px 0;
+  }
 }
 
 .service-item {
   padding: 30px;
   text-align: center;
-  background: var(--secondary);
+  background: var(--gradient-secondary);
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.service-item:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-hover);
+  background: var(--gradient-primary);
 }
 
 .service-item i {
@@ -280,12 +376,17 @@
   justify-content: center;
   background: var(--light);
   color: var(--primary);
-  transition: .5s;
+  transition: all 0.5s ease;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .service-item:hover i {
-  background: var(--primary);
-  color: var(--light);
+  background: var(--light);
+  color: var(--primary);
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .portfolio-item .portfolio-btn {
@@ -333,4 +434,88 @@
 
 .testimonial-carousel .owl-dot.active {
   background: var(--primary);
+}
+
+/* Enhanced Profile Section */
+.d-flex.flex-column.h-100.text-center.overflow-auto.shadow {
+  border-radius: 20px;
+  background: var(--gradient-secondary);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced Statistics Cards */
+.d-flex.bg-secondary.p-4 {
+  border-radius: 15px;
+  background: var(--gradient-secondary);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.d-flex.bg-secondary.p-4:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Enhanced Experience Timeline */
+.border-start.border-2.border-light.pt-2.ps-5 {
+  border-left: 3px solid var(--primary) !important;
+  position: relative;
+}
+
+.border-start.border-2.border-light.pt-2.ps-5::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  background: var(--primary);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--secondary), 0 0 0 8px var(--primary);
+}
+
+/* Enhanced Portfolio Items */
+.portfolio-item {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.portfolio-item:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Enhanced Form Elements */
+.form-control {
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.2rem rgba(0, 184, 123, 0.25);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading Animation Enhancement */
+#spinner {
+  background: var(--gradient-secondary);
+}
+
+/* Enhanced Typography */
+h1.title {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
 }
