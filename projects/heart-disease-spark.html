@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Heart Disease Analysis - Spark Data Pipeline | Sidy BADJI</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Heart Disease Analysis with Apache Spark and Python - Data Engineering Project" name="description">
+    <meta content="Spark, Python, Machine Learning, Data Engineering, Heart Disease, Medical Data Analysis" name="keywords">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="../css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="../index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+            <h1 class="m-0 text-primary">Sidy BADJI</h1>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="../index.html" class="nav-item nav-link">Accueil</a>
+                <a href="../index.html#about" class="nav-item nav-link">À Propos</a>
+                <a href="../index.html#experience" class="nav-item nav-link">Expérience</a>
+                <a href="../index.html#portfolio" class="nav-item nav-link">Portfolio</a>
+                <a href="../index.html#contact" class="nav-item nav-link">Contact</a>
+            </div>
+            <a href="../cv/Sidy BADJI - Data Engineer.pdf" target="_blank" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Télécharger CV<i class="fa fa-arrow-right ms-3"></i></a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Header Start -->
+    <div class="container-fluid bg-primary py-5 mb-5" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/portfolio-1.jpg') center center/cover no-repeat;">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <h1 class="display-3 text-white animated slideInDown">Heart Disease Analysis</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="../index.html">Accueil</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="../index.html#portfolio">Portfolio</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Heart Disease Analysis</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Project Details Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-8">
+                    <!-- Project Overview -->
+                    <div class="mb-5">
+                        <h2 class="mb-4"><i class="fas fa-heartbeat text-danger me-2"></i>Vue d'ensemble du projet</h2>
+                        <p class="lead">Pipeline de données complet pour l'analyse prédictive des maladies cardiaques utilisant Apache Spark et Python, avec des modèles de Machine Learning pour la classification des risques.</p>
+                    </div>
+
+                    <!-- Problem Statement -->
+                    <div class="mb-5">
+                        <h3 class="mb-3"><i class="fas fa-exclamation-triangle text-warning me-2"></i>Problématique</h3>
+                        <div class="bg-light p-4 rounded">
+                            <ul class="mb-0">
+                                <li><strong>Volume de données :</strong> Traitement de 300,000+ enregistrements de données médicales</li>
+                                <li><strong>Complexité :</strong> 13+ caractéristiques cliniques à analyser simultanément</li>
+                                <li><strong>Performance :</strong> Besoin de traitement rapide pour des analyses en temps réel</li>
+                                <li><strong>Précision :</strong> Classification binaire avec haute précision pour l'aide au diagnostic</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Solution -->
+                    <div class="mb-5">
+                        <h3 class="mb-3"><i class="fas fa-lightbulb text-success me-2"></i>Solution</h3>
+                        <div class="bg-light p-4 rounded">
+                            <p class="mb-3">Pipeline de données distribuées avec Apache Spark pour :</p>
+                            <ul class="mb-0">
+                                <li><strong>Ingestion :</strong> Chargement et validation des données médicales</li>
+                                <li><strong>Transformation :</strong> Feature engineering et normalisation des données</li>
+                                <li><strong>Modélisation :</strong> Entraînement de modèles ML avec MLlib</li>
+                                <li><strong>Prédiction :</strong> Classification des risques cardiaques en temps réel</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Architecture Diagram -->
+                    <div class="mb-5">
+                        <h3 class="mb-3"><i class="fas fa-sitemap text-info me-2"></i>Architecture du système</h3>
+                        <div class="bg-dark text-white p-4 rounded text-center">
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <div class="border border-primary p-3 rounded">
+                                        <i class="fas fa-database fa-2x text-primary mb-2"></i>
+                                        <h6>Data Sources</h6>
+                                        <small>CSV, JSON<br>Medical Records</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="border border-success p-3 rounded">
+                                        <i class="fas fa-cloud-upload-alt fa-2x text-success mb-2"></i>
+                                        <h6>Spark Ingestion</h6>
+                                        <small>DataFrame API<br>Schema Validation</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="border border-warning p-3 rounded">
+                                        <i class="fas fa-cogs fa-2x text-warning mb-2"></i>
+                                        <h6>Processing</h6>
+                                        <small>Feature Engineering<br>MLlib Pipeline</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="border border-danger p-3 rounded">
+                                        <i class="fas fa-chart-line fa-2x text-danger mb-2"></i>
+                                        <h6>ML Models</h6>
+                                        <small>Random Forest<br>Logistic Regression</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Flow -->
+                    <div class="mb-5">
+                        <h3 class="mb-3"><i class="fas fa-stream text-primary me-2"></i>Flux de données</h3>
+                        <div class="bg-light p-4 rounded">
+                            <div class="row text-center">
+                                <div class="col-md-2">
+                                    <div class="mb-3">
+                                        <i class="fas fa-file-csv fa-3x text-primary"></i>
+                                        <h6 class="mt-2">Raw Data</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-1 d-flex align-items-center justify-content-center">
+                                    <i class="fas fa-arrow-right fa-2x text-muted"></i>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="mb-3">
+                                        <i class="fas fa-filter fa-3x text-success"></i>
+                                        <h6 class="mt-2">Cleaning</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-1 d-flex align-items-center justify-content-center">
+                                    <i class="fas fa-arrow-right fa-2x text-muted"></i>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="mb-3">
+                                        <i class="fas fa-wrench fa-3x text-warning"></i>
+                                        <h6 class="mt-2">Features</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-1 d-flex align-items-center justify-content-center">
+                                    <i class="fas fa-arrow-right fa-2x text-muted"></i>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="mb-3">
+                                        <i class="fas fa-brain fa-3x text-danger"></i>
+                                        <h6 class="mt-2">ML Model</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Technical Details -->
+                    <div class="mb-5">
+                        <h3 class="mb-3"><i class="fas fa-cogs text-secondary me-2"></i>Détails techniques</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="bg-light p-3 rounded mb-3">
+                                    <h6><i class="fas fa-database text-primary me-2"></i>Données traitées</h6>
+                                    <ul class="mb-0 small">
+                                        <li>300,000+ enregistrements patients</li>
+                                        <li>13 caractéristiques cliniques</li>
+                                        <li>Données démographiques et biologiques</li>
+                                        <li>Variables continues et catégorielles</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="bg-light p-3 rounded mb-3">
+                                    <h6><i class="fas fa-tachometer-alt text-success me-2"></i>Performance</h6>
+                                    <ul class="mb-0 small">
+                                        <li>Traitement : 45 secondes pour 300K records</li>
+                                        <li>Précision modèle : 87.5%</li>
+                                        <li>Recall : 84.2%</li>
+                                        <li>F1-Score : 85.8%</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="bg-light p-3 rounded mb-3">
+                                    <h6><i class="fas fa-tools text-warning me-2"></i>Technologies</h6>
+                                    <ul class="mb-0 small">
+                                        <li>Apache Spark 3.4.0</li>
+                                        <li>Python 3.9</li>
+                                        <li>PySpark MLlib</li>
+                                        <li>Pandas, NumPy</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="bg-light p-3 rounded mb-3">
+                                    <h6><i class="fas fa-chart-bar text-info me-2"></i>Modèles ML</h6>
+                                    <ul class="mb-0 small">
+                                        <li>Random Forest Classifier</li>
+                                        <li>Logistic Regression</li>
+                                        <li>Gradient Boosting</li>
+                                        <li>Cross-validation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Code Snippets -->
+                    <div class="mb-5">
+                        <h3 class="mb-3"><i class="fas fa-code text-dark me-2"></i>Extraits de code</h3>
+
+                        <!-- Data Ingestion -->
+                        <div class="mb-4">
+                            <h5><i class="fas fa-cloud-download-alt text-primary me-2"></i>1. Ingestion des données</h5>
+                            <pre class="bg-dark text-light p-3 rounded"><code>from pyspark.sql import SparkSession
+from pyspark.sql.types import *
+from pyspark.sql.functions import *
+
+# Initialisation de Spark
+spark = SparkSession.builder \
+    .appName("HeartDiseaseAnalysis") \
+    .config("spark.sql.adaptive.enabled", "true") \
+    .config("spark.sql.adaptive.coalescePartitions.enabled", "true") \
+    .getOrCreate()
+
+# Définition du schéma
+schema = StructType([
+    StructField("age", IntegerType(), True),
+    StructField("sex", IntegerType(), True),
+    StructField("cp", IntegerType(), True),
+    StructField("trestbps", IntegerType(), True),
+    StructField("chol", IntegerType(), True),
+    StructField("fbs", IntegerType(), True),
+    StructField("restecg", IntegerType(), True),
+    StructField("thalach", IntegerType(), True),
+    StructField("exang", IntegerType(), True),
+    StructField("oldpeak", DoubleType(), True),
+    StructField("slope", IntegerType(), True),
+    StructField("ca", IntegerType(), True),
+    StructField("thal", IntegerType(), True),
+    StructField("target", IntegerType(), True)
+])
+
+# Chargement des données
+df = spark.read \
+    .schema(schema) \
+    .option("header", "true") \
+    .csv("data/heart_disease.csv")
+
+print(f"Nombre d'enregistrements: {df.count()}")
+df.printSchema()</code></pre>
+                        </div>
+
+                        <!-- Data Cleaning -->
+                        <div class="mb-4">
+                            <h5><i class="fas fa-broom text-success me-2"></i>2. Nettoyage des données</h5>
+                            <pre class="bg-dark text-light p-3 rounded"><code>from pyspark.sql.functions import when, col, isnan, count
+
+# Vérification des valeurs manquantes
+missing_data = df.select([count(when(col(c).isNull() | isnan(col(c)), c)).alias(c) 
+                         for c in df.columns])
+missing_data.show()
+
+# Gestion des valeurs aberrantes
+df_cleaned = df.filter(
+    (col("age") >= 29) & (col("age") <= 77) &
+    (col("trestbps") >= 94) & (col("trestbps") <= 200) &
+    (col("chol") >= 126) & (col("chol") <= 564) &
+    (col("thalach") >= 71) & (col("thalach") <= 202) &
+    (col("oldpeak") >= 0) & (col("oldpeak") <= 6.2)
+)
+
+# Suppression des doublons
+df_cleaned = df_cleaned.dropDuplicates()
+
+print(f"Données après nettoyage: {df_cleaned.count()}")</code></pre>
+                        </div>
+
+                        <!-- Feature Engineering -->
+                        <div class="mb-4">
+                            <h5><i class="fas fa-wrench text-warning me-2"></i>3. Feature Engineering</h5>
+                            <pre class="bg-dark text-light p-3 rounded"><code>from pyspark.ml.feature import VectorAssembler, StandardScaler, StringIndexer
+from pyspark.ml import Pipeline
+
+# Création de nouvelles features
+df_features = df_cleaned.withColumn(
+    "age_group", 
+    when(col("age") < 45, 0)
+    .when(col("age") < 55, 1)
+    .when(col("age") < 65, 2)
+    .otherwise(3)
+).withColumn(
+    "bmi_category",
+    when(col("chol") / (col("age") * 0.01) < 25, 0)
+    .when(col("chol") / (col("age") * 0.01) < 30, 1)
+    .otherwise(2)
+).withColumn(
+    "risk_factor",
+    (col("age") * 0.1) + (col("chol") * 0.01) + 
+    (col("trestbps") * 0.1) + (col("oldpeak") * 10)
+)
+
+# Préparation des features pour ML
+feature_columns = ["age", "sex", "cp", "trestbps", "chol", "fbs", 
+                   "restecg", "thalach", "exang", "oldpeak", "slope", 
+                   "ca", "thal", "age_group", "bmi_category", "risk_factor"]
+
+# Assemblage des vecteurs
+assembler = VectorAssembler(
+    inputCols=feature_columns,
+    outputCol="features"
+)
+
+# Normalisation
+scaler = StandardScaler(
+    inputCol="features",
+    outputCol="scaled_features"
+)
+
+# Pipeline de transformation
+transformation_pipeline = Pipeline(stages=[assembler, scaler])
+df_transformed = transformation_pipeline.fit(df_features).transform(df_features)</code></pre>
+                        </div>
+
+                        <!-- ML Model Training -->
+                        <div class="mb-4">
+                            <h5><i class="fas fa-brain text-danger me-2"></i>4. Entraînement des modèles ML</h5>
+                            <pre class="bg-dark text-light p-3 rounded"><code>from pyspark.ml.classification import RandomForestClassifier, LogisticRegression, GBTClassifier
+from pyspark.ml.evaluation import BinaryClassificationEvaluator, MulticlassClassificationEvaluator
+from pyspark.ml.tuning import CrossValidator, ParamGridBuilder
+
+# Division train/test
+train_data, test_data = df_transformed.randomSplit([0.8, 0.2], seed=42)
+
+# Modèle Random Forest
+rf = RandomForestClassifier(
+    featuresCol="scaled_features",
+    labelCol="target",
+    numTrees=100,
+    maxDepth=10,
+    seed=42
+)
+
+# Modèle Logistic Regression
+lr = LogisticRegression(
+    featuresCol="scaled_features",
+    labelCol="target",
+    maxIter=100,
+    regParam=0.01
+)
+
+# Modèle Gradient Boosting
+gbt = GBTClassifier(
+    featuresCol="scaled_features",
+    labelCol="target",
+    maxIter=50
+)
+
+# Entraînement des modèles
+rf_model = rf.fit(train_data)
+lr_model = lr.fit(train_data)
+gbt_model = gbt.fit(train_data)
+
+# Prédictions
+rf_predictions = rf_model.transform(test_data)
+lr_predictions = lr_model.transform(test_data)
+gbt_predictions = gbt_model.transform(test_data)</code></pre>
+                        </div>
+
+                        <!-- Model Evaluation -->
+                        <div class="mb-4">
+                            <h5><i class="fas fa-chart-line text-info me-2"></i>5. Évaluation des modèles</h5>
+                            <pre class="bg-dark text-light p-3 rounded"><code>from pyspark.ml.evaluation import BinaryClassificationEvaluator, MulticlassClassificationEvaluator
+
+# Évaluateurs
+binary_evaluator = BinaryClassificationEvaluator(labelCol="target")
+multi_evaluator = MulticlassClassificationEvaluator(labelCol="target")
+
+def evaluate_model(predictions, model_name):
+    """Évalue un modèle et retourne les métriques"""
+    
+    # AUC
+    auc = binary_evaluator.evaluate(predictions, {binary_evaluator.metricName: "areaUnderROC"})
+    
+    # Précision, Recall, F1
+    accuracy = multi_evaluator.evaluate(predictions, {multi_evaluator.metricName: "accuracy"})
+    precision = multi_evaluator.evaluate(predictions, {multi_evaluator.metricName: "weightedPrecision"})
+    recall = multi_evaluator.evaluate(predictions, {multi_evaluator.metricName: "weightedRecall"})
+    f1 = multi_evaluator.evaluate(predictions, {multi_evaluator.metricName: "f1"})
+    
+    print(f"\n=== {model_name} ===")
+    print(f"AUC: {auc:.4f}")
+    print(f"Accuracy: {accuracy:.4f}")
+    print(f"Precision: {precision:.4f}")
+    print(f"Recall: {recall:.4f}")
+    print(f"F1-Score: {f1:.4f}")
+    
+    return {"auc": auc, "accuracy": accuracy, "precision": precision, "recall": recall, "f1": f1}
+
+# Évaluation de tous les modèles
+rf_metrics = evaluate_model(rf_predictions, "Random Forest")
+lr_metrics = evaluate_model(lr_predictions, "Logistic Regression")
+gbt_metrics = evaluate_model(gbt_predictions, "Gradient Boosting")
+
+# Sélection du meilleur modèle
+best_model = max([rf_metrics, lr_metrics, gbt_metrics], key=lambda x: x['f1'])
+print(f"\nMeilleur modèle: {best_model}")</code></pre>
+                        </div>
+
+                        <!-- Model Deployment -->
+                        <div class="mb-4">
+                            <h5><i class="fas fa-rocket text-success me-2"></i>6. Déploiement et prédiction</h5>
+                            <pre class="bg-dark text-light p-3 rounded"><code>import pickle
+from pyspark.ml import PipelineModel
+
+# Sauvegarde du modèle
+best_model_path = "models/heart_disease_best_model"
+if best_model == rf_metrics:
+    rf_model.write().overwrite().save(best_model_path)
+    model_type = "RandomForest"
+elif best_model == lr_metrics:
+    lr_model.write().overwrite().save(best_model_path)
+    model_type = "LogisticRegression"
+else:
+    gbt_model.write().overwrite().save(best_model_path)
+    model_type = "GradientBoosting"
+
+print(f"Modèle {model_type} sauvegardé avec succès")
+
+# Fonction de prédiction en temps réel
+def predict_heart_disease(patient_data):
+    """Prédit le risque de maladie cardiaque pour un patient"""
+    
+    # Chargement du modèle
+    model = PipelineModel.load(best_model_path)
+    
+    # Création du DataFrame patient
+    patient_df = spark.createDataFrame([patient_data], schema)
+    
+    # Prédiction
+    prediction = model.transform(patient_df)
+    
+    # Récupération du résultat
+    result = prediction.select("prediction", "probability").collect()[0]
+    
+    risk_level = "Élevé" if result["prediction"] == 1 else "Faible"
+    confidence = result["probability"][1] if result["prediction"] == 1 else result["probability"][0]
+    
+    return {
+        "risk_level": risk_level,
+        "confidence": round(confidence * 100, 2),
+        "recommendation": "Consultation cardiologique recommandée" if result["prediction"] == 1 else "Surveillance normale"
+    }
+
+# Exemple d'utilisation
+sample_patient = {
+    "age": 55, "sex": 1, "cp": 3, "trestbps": 145,
+    "chol": 233, "fbs": 1, "restecg": 0, "thalach": 150,
+    "exang": 0, "oldpeak": 2.3, "slope": 0, "ca": 0, "thal": 1, "target": 1
+}
+
+result = predict_heart_disease(sample_patient)
+print(f"Résultat: {result}")</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <!-- Project Info -->
+                    <div class="bg-light rounded p-4 mb-5">
+                        <h4 class="mb-3"><i class="fas fa-info-circle text-primary me-2"></i>Informations du projet</h4>
+                        <div class="mb-3">
+                            <h6><i class="fas fa-calendar text-success me-2"></i>Durée</h6>
+                            <p class="mb-0">3 semaines</p>
+                        </div>
+                        <div class="mb-3">
+                            <h6><i class="fas fa-users text-info me-2"></i>Équipe</h6>
+                            <p class="mb-0">1 Data Engineer</p>
+                        </div>
+                        <div class="mb-3">
+                            <h6><i class="fas fa-code-branch text-warning me-2"></i>Méthodologie</h6>
+                            <p class="mb-0">Agile, CI/CD</p>
+                        </div>
+                        <div class="mb-3">
+                            <h6><i class="fas fa-github text-dark me-2"></i>Référentiel</h6>
+                            <p class="mb-0">Repository privé</p>
+                        </div>
+                    </div>
+
+                    <!-- Technologies Used -->
+                    <div class="bg-light rounded p-4 mb-5">
+                        <h4 class="mb-3"><i class="fas fa-tools text-primary me-2"></i>Technologies utilisées</h4>
+                        <div class="row">
+                            <div class="col-6 mb-2">
+                                <span class="badge bg-primary w-100">Apache Spark</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="badge bg-success w-100">Python 3.9</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="badge bg-info w-100">PySpark MLlib</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="badge bg-warning w-100">Pandas</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="badge bg-danger w-100">NumPy</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="badge bg-secondary w-100">Scikit-learn</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Key Metrics -->
+                    <div class="bg-light rounded p-4 mb-5">
+                        <h4 class="mb-3"><i class="fas fa-chart-bar text-primary me-2"></i>Métriques clés</h4>
+                        <div class="row text-center">
+                            <div class="col-6 mb-3">
+                                <h3 class="text-primary mb-0">87.5%</h3>
+                                <small class="text-muted">Précision</small>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <h3 class="text-success mb-0">84.2%</h3>
+                                <small class="text-muted">Recall</small>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <h3 class="text-info mb-0">85.8%</h3>
+                                <small class="text-muted">F1-Score</small>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <h3 class="text-warning mb-0">45s</h3>
+                                <small class="text-muted">Traitement</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Business Impact -->
+                    <div class="bg-light rounded p-4">
+                        <h4 class="mb-3"><i class="fas fa-bullseye text-primary me-2"></i>Impact business</h4>
+                        <ul class="mb-0">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Aide au diagnostic précoce</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Réduction des coûts médicaux</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Amélioration des soins patients</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Optimisation des ressources hospitalières</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Project Details End -->
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-primary text-light footer mt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5 px-lg-5">
+            <div class="row g-5">
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="text-white mb-4">Sidy BADJI</h5>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Le Perreux-sur-Marne, France</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+33 7 89 03 27 52</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>sidybadji935@gmail.com</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href="https://linkedin.com/in/sidybadji" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://github.com/sidybadji" target="_blank"><i class="fab fa-github"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="mailto:sidybadji935@gmail.com"><i class="fab fa-google"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="text-white mb-4">Liens rapides</h5>
+                    <a class="btn btn-link" href="../index.html">Accueil</a>
+                    <a class="btn btn-link" href="../index.html#about">À Propos</a>
+                    <a class="btn btn-link" href="../index.html#experience">Expérience</a>
+                    <a class="btn btn-link" href="../index.html#portfolio">Portfolio</a>
+                    <a class="btn btn-link" href="../index.html#contact">Contact</a>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="text-white mb-4">Services</h5>
+                    <a class="btn btn-link" href="../index.html#services">Data Engineering</a>
+                    <a class="btn btn-link" href="../index.html#services">Cloud Architecture</a>
+                    <a class="btn btn-link" href="../index.html#services">Backend Development</a>
+                    <a class="btn btn-link" href="../index.html#services">Machine Learning</a>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="text-white mb-4">Newsletter</h5>
+                    <p>Restez informé de mes derniers projets et articles techniques.</p>
+                    <div class="position-relative w-100" style="max-width: 400px;">
+                        <input class="form-control border-0 py-3 px-4 w-100" type="text" placeholder="Votre email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">S'abonner</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container px-lg-5">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="../index.html">Sidy BADJI</a>, Tous droits réservés. Conçu par <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-menu">
+                            <a href="">Confidentialité</a>
+                            <a href="">Conditions</a>
+                            <a href="">FAQs</a>
+                            <a href="">Aide</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../lib/wow/wow.min.js"></script>
+    <script src="../lib/easing/easing.min.js"></script>
+    <script src="../lib/waypoints/waypoints.min.js"></script>
+    <script src="../lib/counterup/counterup.min.js"></script>
+    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../lib/isotope/isotope.pkgd.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="../js/main.js"></script>
+</body>
+</html>

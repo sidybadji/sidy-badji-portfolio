@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projets Confidentiels - Portfolio Sidy Badji</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .confidential-badge {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 0.25rem;
+            display: inline-block;
+        }
+        .confidential-card {
+            border: 2px solid #ff6b6b;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .confidential-card::before {
+            content: "CONFIDENTIEL";
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 40px;
+            font-size: 12px;
+            font-weight: bold;
+            transform: rotate(45deg);
+            letter-spacing: 2px;
+        }
+        .project-summary {
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+        .tech-stack {
+            background: #e9ecef;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .impact-metrics {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-arrow-left me-2"></i>Retour au Portfolio
+            </a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Header -->
+                <div class="text-center mb-5">
+                    <h1 class="display-4 mb-3">🔒 Projets Confidentiels</h1>
+                    <p class="lead text-muted">Expériences professionnelles sous accord de confidentialité</p>
+                    <div class="mt-4">
+                        <span class="confidential-badge">Confidentiel</span>
+                        <span class="confidential-badge">NDA</span>
+                        <span class="confidential-badge">Propriétaire</span>
+                        <span class="confidential-badge">Sécurisé</span>
+                    </div>
+                </div>
+
+                <!-- Confidentiality Notice -->
+                <div class="confidential-card">
+                    <div class="text-center">
+                        <i class="fas fa-lock fa-3x text-danger mb-3"></i>
+                        <h3 class="text-danger mb-3">Accord de Confidentialité</h3>
+                        <p class="lead">
+                            Les projets suivants sont couverts par des accords de confidentialité stricts 
+                            et des clauses de non-divulgation (NDA) avec mes employeurs et clients.
+                        </p>
+                        <p>
+                            Par respect pour ces engagements et la protection de la propriété intellectuelle, 
+                            je ne peux pas divulguer les détails techniques, les architectures ou les données 
+                            spécifiques de ces projets.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Project Categories -->
+                <div class="row mb-5">
+                    <div class="col-md-6">
+                        <div class="project-summary">
+                            <h5><i class="fas fa-building text-primary me-2"></i>Projets Entreprise</h5>
+                            <p class="mb-2"><strong>GoGP (Décembre 2023 – Juillet 2025)</strong></p>
+                            <ul class="small">
+                                <li>Architectures data complexes</li>
+                                <li>APIs haute performance</li>
+                                <li>Systèmes de monitoring avancés</li>
+                                <li>Optimisations de coûts cloud</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="project-summary">
+                            <h5><i class="fas fa-car text-success me-2"></i>Projets Automobile</h5>
+                            <p class="mb-2"><strong>Renault Group (Avril 2023 - Septembre 2023)</strong></p>
+                            <ul class="small">
+                                <li>Pipelines IoT industriels</li>
+                                <li>Modèles ML pour véhicules</li>
+                                <li>Systèmes de télémétrie</li>
+                                <li>Analytics temps réel</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-5">
+                    <div class="col-md-6">
+                        <div class="project-summary">
+                            <h5><i class="fas fa-cloud text-info me-2"></i>Projets Cloud</h5>
+                            <p class="mb-2"><strong>Claranet Paris (Avril 2021 – Septembre 2022)</strong></p>
+                            <ul class="small">
+                                <li>Migrations cloud complexes</li>
+                                <li>Architectures microservices</li>
+                                <li>Systèmes de backup automatisés</li>
+                                <li>Monitoring infrastructure</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="project-summary">
+                            <h5><i class="fas fa-chart-line text-warning me-2"></i>Projets Analytics</h5>
+                            <p class="mb-2"><strong>Clients divers (Freelance)</strong></p>
+                            <ul class="small">
+                                <li>Dashboards exécutifs</li>
+                                <li>Modèles prédictifs</li>
+                                <li>Systèmes de recommandation</li>
+                                <li>Analytics comportementales</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technology Stack -->
+                <div class="tech-stack">
+                    <h5><i class="fas fa-code me-2"></i>Technologies Utilisées (Sélection)</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Data Engineering</h6>
+                            <ul class="small">
+                                <li>Apache Spark, Kafka, Airflow</li>
+                                <li>Python, Java, Scala</li>
+                                <li>BigQuery, PostgreSQL, MongoDB</li>
+                                <li>Docker, Kubernetes</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Cloud & DevOps</h6>
+                            <ul class="small">
+                                <li>Google Cloud Platform, AWS</li>
+                                <li>GitLab CI/CD, Jenkins</li>
+                                <li>Terraform, Ansible</li>
+                                <li>Monitoring: Prometheus, Grafana</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Machine Learning</h6>
+                            <ul class="small">
+                                <li>TensorFlow, PyTorch, Scikit-learn</li>
+                                <li>MLflow, Kubeflow</li>
+                                <li>Computer Vision, NLP</li>
+                                <li>MLOps, Feature Stores</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Frontend & APIs</h6>
+                            <ul class="small">
+                                <li>React, Vue.js, Angular</li>
+                                <li>FastAPI, Spring Boot</li>
+                                <li>GraphQL, REST</li>
+                                <li>Microservices architecture</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Impact Metrics -->
+                <div class="impact-metrics">
+                    <h3 class="mb-4">Impact des Projets Confidentiels</h3>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h2>15+</h2>
+                            <p>Projets livrés</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h2>€2M+</h2>
+                            <p>Valeur business créée</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h2>99.9%</h2>
+                            <p>Disponibilité moyenne</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h2>50+</h2>
+                            <p>Technologies maîtrisées</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Confidentiality Commitment -->
+                <div class="card mb-5">
+                    <div class="card-header bg-dark text-white">
+                        <h3><i class="fas fa-shield-alt me-2"></i>Engagement de Confidentialité</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>🔒 Protection des Données</h5>
+                                <ul>
+                                    <li>Respect strict des accords NDA</li>
+                                    <li>Protection de la propriété intellectuelle</li>
+                                    <li>Conformité RGPD et standards sécurité</li>
+                                    <li>Chiffrement des communications</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>🤝 Éthique Professionnelle</h5>
+                                <ul>
+                                    <li>Transparence sur les limitations</li>
+                                    <li>Communication claire des contraintes</li>
+                                    <li>Respect des engagements contractuels</li>
+                                    <li>Intégrité professionnelle</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info mt-4">
+                            <h6><i class="fas fa-info-circle me-2"></i>Note Importante</h6>
+                            <p class="mb-0">
+                                <strong>Discussions Détaillées :</strong> Pour les projets confidentiels, je peux discuter 
+                                des technologies utilisées, des défis techniques rencontrés et des méthodologies appliquées 
+                                lors d'entretiens, tout en respectant les contraintes de confidentialité. Les références 
+                                détaillées sont disponibles sur demande avec accord préalable.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Available References -->
+                <div class="card mb-5">
+                    <div class="card-header bg-success text-white">
+                        <h3><i class="fas fa-user-check me-2"></i>Références Disponibles</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            Bien que les détails techniques des projets soient confidentiels, je peux fournir :
+                        </p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul>
+                                    <li><strong>Lettres de recommandation</strong> des employeurs</li>
+                                    <li><strong>Témoignages clients</strong> sur la qualité du travail</li>
+                                    <li><strong>Métriques de performance</strong> (sans détails techniques)</li>
+                                    <li><strong>Certifications</strong> et formations suivies</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul>
+                                    <li><strong>Portfolio technique</strong> avec projets publics</li>
+                                    <li><strong>Code open source</strong> et contributions</li>
+                                    <li><strong>Publications</strong> et articles techniques</li>
+                                    <li><strong>Présentations</strong> lors de conférences</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <a href="mailto:sidybadji935@gmail.com" class="btn btn-primary btn-lg">
+                                <i class="fas fa-envelope me-2"></i>Demander les Références
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact for Details -->
+                <div class="card mb-5">
+                    <div class="card-header bg-primary text-white">
+                        <h3><i class="fas fa-comments me-2"></i>Discussions Techniques</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="lead text-center">
+                            Intéressé par mes expériences sur ces projets confidentiels ?
+                        </p>
+                        <p class="text-center">
+                            Je serais ravi de discuter des technologies, défis et solutions lors d'un entretien, 
+                            en respectant les contraintes de confidentialité.
+                        </p>
+                        
+                        <div class="row text-center mt-4">
+                            <div class="col-md-4">
+                                <i class="fas fa-phone fa-2x text-primary mb-2"></i>
+                                <h6>Téléphone</h6>
+                                <p>+33 7 89 03 27 52</p>
+                            </div>
+                            <div class="col-md-4">
+                                <i class="fas fa-envelope fa-2x text-primary mb-2"></i>
+                                <h6>Email</h6>
+                                <p>sidybadji935@gmail.com</p>
+                            </div>
+                            <div class="col-md-4">
+                                <i class="fab fa-linkedin fa-2x text-primary mb-2"></i>
+                                <h6>LinkedIn</h6>
+                                <p>linkedin.com/in/sidybadji</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="text-center mb-5">
+                    <a href="../index.html" class="btn btn-primary btn-lg">
+                        <i class="fas fa-arrow-left me-2"></i>Retour au Portfolio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

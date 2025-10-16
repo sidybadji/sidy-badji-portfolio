@@ -1,0 +1,52 @@
+{
+  "name": "sidy-badji-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio professionnel de Sidy BADJI - Data Engineer spécialisé en Python, Java, Spark et GCP",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "python3 -m http.server 8000",
+    "deploy:github": "./deploy.sh github",
+    "deploy:netlify": "./deploy.sh netlify",
+    "deploy:vercel": "./deploy.sh vercel",
+    "build": "echo 'Site statique - pas de build nécessaire'",
+    "test": "echo 'Tests à implémenter'",
+    "lint": "echo 'Linting à implémenter'"
+  },
+  "keywords": [
+    "portfolio",
+    "data-engineer",
+    "python",
+    "java",
+    "spark",
+    "gcp",
+    "machine-learning",
+    "bootstrap",
+    "responsive",
+    "multilingual"
+  ],
+  "author": {
+    "name": "Sidy BADJI",
+    "email": "sidybadji935@gmail.com",
+    "url": "https://linkedin.com/in/sidybadji"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sidybadji/sidy-badji-portfolio.git"
+  },
+  "homepage": "https://sidybadji.github.io/sidy-badji-portfolio",
+  "bugs": {
+    "url": "https://github.com/sidybadji/sidy-badji-portfolio/issues"
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
