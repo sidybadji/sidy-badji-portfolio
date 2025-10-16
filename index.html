@@ -339,6 +339,38 @@
                     <!-- Portfolio Start -->
                     <section class="py-5 border-bottom wow fadeInUp" data-wow-delay="0.1s">
                         <h1 class="title pb-3 mb-5" data-fr="Portfolio" data-en="Portfolio">Portfolio</h1>
+                        
+                        <!-- Légende des badges -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="card bg-secondary">
+                                    <div class="card-body">
+                                        <h6 class="card-title mb-3" data-fr="📋 Légende des projets" data-en="📋 Project Legend">📋 Légende des projets</h6>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <span class="badge bg-success me-2 d-flex align-items-center">
+                                                        <i class="fas fa-eye me-1"></i>
+                                                        <span data-fr="Public" data-en="Public">Public</span>
+                                                    </span>
+                                                    <small data-fr="Code complet accessible" data-en="Full code accessible">Code complet accessible</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <span class="badge bg-danger me-2 d-flex align-items-center">
+                                                        <i class="fas fa-lock me-1"></i>
+                                                        <span data-fr="Confidentiel" data-en="Confidential">Confidentiel</span>
+                                                    </span>
+                                                    <small data-fr="Contexte uniquement (NDA)" data-en="Context only (NDA)">Contexte uniquement (NDA)</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="row">
                             <div class="col-12">
                                 <div class="row">
@@ -355,13 +387,20 @@
                                     <div class="col-md-6 mb-4 portfolio-item data-engineering">
                                         <div class="position-relative overflow-hidden mb-2">
                                             <img class="img-fluid w-100" src="img/portfolio-1.jpg" alt="Pipeline IoT Renault">
+                                            <!-- Badge confidentiel -->
+                                            <div class="position-absolute top-0 end-0 m-2">
+                                                <span class="badge bg-danger d-flex align-items-center">
+                                                    <i class="fas fa-lock me-1"></i>
+                                                    <span data-fr="Confidentiel" data-en="Confidential">Confidentiel</span>
+                                                </span>
+                                            </div>
                                             <div class="portfolio-btn d-flex align-items-center justify-content-center">
                                                 <a href="projects/confidential-projects.html" class="text-decoration-none">
                                                     <div class="text-center text-light">
                                                         <h6 class="mb-2" data-fr="Pipeline IoT Renault" data-en="Renault IoT Pipeline">Pipeline IoT Renault</h6>
                                                         <p class="mb-0 small">Python, Spark, GCP</p>
                                                         <p class="mb-0 small" data-fr="Traitement données véhicules" data-en="Vehicle data processing">Traitement données véhicules</p>
-                                                        <i class="fas fa-external-link-alt mt-2"></i>
+                                                        <i class="fas fa-lock mt-2"></i>
                                                     </div>
                                                 </a>
                                             </div>
@@ -370,13 +409,20 @@
                                     <div class="col-md-6 mb-4 portfolio-item ml-ai">
                                         <div class="position-relative overflow-hidden mb-2">
                                             <img class="img-fluid w-100" src="img/portfolio-2.jpg" alt="Détection Attention Conducteur">
+                                            <!-- Badge confidentiel -->
+                                            <div class="position-absolute top-0 end-0 m-2">
+                                                <span class="badge bg-danger d-flex align-items-center">
+                                                    <i class="fas fa-lock me-1"></i>
+                                                    <span data-fr="Confidentiel" data-en="Confidential">Confidentiel</span>
+                                                </span>
+                                            </div>
                                             <div class="portfolio-btn d-flex align-items-center justify-content-center">
                                                 <a href="projects/confidential-projects.html" class="text-decoration-none">
                                                     <div class="text-center text-light">
                                                         <h6 class="mb-2" data-fr="Détection Attention Conducteur" data-en="Driver Attention Detection">Détection Attention Conducteur</h6>
                                                         <p class="mb-0 small">PyTorch, OpenCV</p>
                                                         <p class="mb-0 small">Computer Vision</p>
-                                                        <i class="fas fa-external-link-alt mt-2"></i>
+                                                        <i class="fas fa-lock mt-2"></i>
                                                     </div>
                                                 </a>
                                             </div>
@@ -385,13 +431,20 @@
                                     <div class="col-md-6 mb-4 portfolio-item backend">
                                         <div class="position-relative overflow-hidden mb-2">
                                             <img class="img-fluid w-100" src="img/portfolio-3.jpg" alt="API GoGP">
+                                            <!-- Badge confidentiel -->
+                                            <div class="position-absolute top-0 end-0 m-2">
+                                                <span class="badge bg-danger d-flex align-items-center">
+                                                    <i class="fas fa-lock me-1"></i>
+                                                    <span data-fr="Confidentiel" data-en="Confidential">Confidentiel</span>
+                                                </span>
+                                            </div>
                                             <div class="portfolio-btn d-flex align-items-center justify-content-center">
                                                 <a href="projects/confidential-projects.html" class="text-decoration-none">
                                                     <div class="text-center text-light">
                                                         <h6 class="mb-2" data-fr="API RESTful GoGP" data-en="GoGP RESTful API">API RESTful GoGP</h6>
                                                         <p class="mb-0 small">Spring Boot, JWT</p>
                                                         <p class="mb-0 small" data-fr="Sécurité & Performance" data-en="Security & Performance">Sécurité & Performance</p>
-                                                        <i class="fas fa-external-link-alt mt-2"></i>
+                                                        <i class="fas fa-lock mt-2"></i>
                                                     </div>
                                                 </a>
                                             </div>
@@ -400,13 +453,20 @@
                                     <div class="col-md-6 mb-4 portfolio-item data-engineering">
                                         <div class="position-relative overflow-hidden mb-2">
                                             <img class="img-fluid w-100" src="img/portfolio-4.jpg" alt="Migration Cloud Claranet">
+                                            <!-- Badge confidentiel -->
+                                            <div class="position-absolute top-0 end-0 m-2">
+                                                <span class="badge bg-danger d-flex align-items-center">
+                                                    <i class="fas fa-lock me-1"></i>
+                                                    <span data-fr="Confidentiel" data-en="Confidential">Confidentiel</span>
+                                                </span>
+                                            </div>
                                             <div class="portfolio-btn d-flex align-items-center justify-content-center">
                                                 <a href="projects/confidential-projects.html" class="text-decoration-none">
                                                     <div class="text-center text-light">
                                                         <h6 class="mb-2" data-fr="Migration Cloud Claranet" data-en="Claranet Cloud Migration">Migration Cloud Claranet</h6>
                                                         <p class="mb-0 small">GCP, BigQuery</p>
                                                         <p class="mb-0 small" data-fr="Automatisation" data-en="Automation">Automatisation</p>
-                                                        <i class="fas fa-external-link-alt mt-2"></i>
+                                                        <i class="fas fa-lock mt-2"></i>
                                                     </div>
                                                 </a>
                                             </div>
@@ -415,6 +475,13 @@
                                     <div class="col-md-6 mb-4 portfolio-item data-engineering">
                                         <div class="position-relative overflow-hidden mb-2">
                                             <img class="img-fluid w-100" src="img/portfolio-1.jpg" alt="Yellow Taxi Data Pipeline">
+                                            <!-- Badge public -->
+                                            <div class="position-absolute top-0 end-0 m-2">
+                                                <span class="badge bg-success d-flex align-items-center">
+                                                    <i class="fas fa-eye me-1"></i>
+                                                    <span data-fr="Public" data-en="Public">Public</span>
+                                                </span>
+                                            </div>
                                             <div class="portfolio-btn d-flex align-items-center justify-content-center">
                                                 <a href="projects/yellow-taxi-pipeline.html" class="text-decoration-none">
                                                     <div class="text-center text-light">
@@ -430,6 +497,13 @@
                                     <div class="col-md-6 mb-4 portfolio-item ml-ai">
                                         <div class="position-relative overflow-hidden mb-2">
                                             <img class="img-fluid w-100" src="img/portfolio-2.jpg" alt="FinTech Fraud Detection">
+                                            <!-- Badge public -->
+                                            <div class="position-absolute top-0 end-0 m-2">
+                                                <span class="badge bg-success d-flex align-items-center">
+                                                    <i class="fas fa-eye me-1"></i>
+                                                    <span data-fr="Public" data-en="Public">Public</span>
+                                                </span>
+                                            </div>
                                             <div class="portfolio-btn d-flex align-items-center justify-content-center">
                                                 <a href="projects/fintech-fraud-detection.html" class="text-decoration-none">
                                                     <div class="text-center text-light">
@@ -445,6 +519,13 @@
                                     <div class="col-md-6 mb-4 portfolio-item ml-ai">
                                         <div class="position-relative overflow-hidden mb-2">
                                             <img class="img-fluid w-100" src="img/portfolio-3.jpg" alt="Driver Behavior Detection">
+                                            <!-- Badge public -->
+                                            <div class="position-absolute top-0 end-0 m-2">
+                                                <span class="badge bg-success d-flex align-items-center">
+                                                    <i class="fas fa-eye me-1"></i>
+                                                    <span data-fr="Public" data-en="Public">Public</span>
+                                                </span>
+                                            </div>
                                             <div class="portfolio-btn d-flex align-items-center justify-content-center">
                                                 <a href="projects/driver-behavior-detection.html" class="text-decoration-none">
                                                     <div class="text-center text-light">
@@ -460,6 +541,13 @@
                                     <div class="col-md-6 mb-4 portfolio-item data-engineering">
                                         <div class="position-relative overflow-hidden mb-2">
                                             <img class="img-fluid w-100" src="img/portfolio-1.jpg" alt="Heart Disease Analysis">
+                                            <!-- Badge public -->
+                                            <div class="position-absolute top-0 end-0 m-2">
+                                                <span class="badge bg-success d-flex align-items-center">
+                                                    <i class="fas fa-eye me-1"></i>
+                                                    <span data-fr="Public" data-en="Public">Public</span>
+                                                </span>
+                                            </div>
                                             <div class="portfolio-btn d-flex align-items-center justify-content-center">
                                                 <a href="projects/heart-disease-spark.html" class="text-decoration-none">
                                                     <div class="text-center text-light">
@@ -475,6 +563,13 @@
                                     <div class="col-md-6 mb-4 portfolio-item data-engineering">
                                         <div class="position-relative overflow-hidden mb-2">
                                             <img class="img-fluid w-100" src="img/portfolio-1.jpg" alt="Airbnb Pricing Analysis">
+                                            <!-- Badge public -->
+                                            <div class="position-absolute top-0 end-0 m-2">
+                                                <span class="badge bg-success d-flex align-items-center">
+                                                    <i class="fas fa-eye me-1"></i>
+                                                    <span data-fr="Public" data-en="Public">Public</span>
+                                                </span>
+                                            </div>
                                             <div class="portfolio-btn d-flex align-items-center justify-content-center">
                                                 <a href="projects/airbnb-pricing-analysis.html" class="text-decoration-none">
                                                     <div class="text-center text-light">
@@ -490,6 +585,13 @@
                                     <div class="col-md-6 mb-4 portfolio-item data-engineering">
                                         <div class="position-relative overflow-hidden mb-2">
                                             <img class="img-fluid w-100" src="img/portfolio-2.jpg" alt="Netflix Recommendation Engine">
+                                            <!-- Badge public -->
+                                            <div class="position-absolute top-0 end-0 m-2">
+                                                <span class="badge bg-success d-flex align-items-center">
+                                                    <i class="fas fa-eye me-1"></i>
+                                                    <span data-fr="Public" data-en="Public">Public</span>
+                                                </span>
+                                            </div>
                                             <div class="portfolio-btn d-flex align-items-center justify-content-center">
                                                 <a href="projects/netflix-recommendation-engine.html" class="text-decoration-none">
                                                     <div class="text-center text-light">
@@ -505,6 +607,13 @@
                                     <div class="col-md-6 mb-4 portfolio-item data-engineering">
                                         <div class="position-relative overflow-hidden mb-2">
                                             <img class="img-fluid w-100" src="img/portfolio-3.jpg" alt="Uber Eats Logistics Optimization">
+                                            <!-- Badge public -->
+                                            <div class="position-absolute top-0 end-0 m-2">
+                                                <span class="badge bg-success d-flex align-items-center">
+                                                    <i class="fas fa-eye me-1"></i>
+                                                    <span data-fr="Public" data-en="Public">Public</span>
+                                                </span>
+                                            </div>
                                             <div class="portfolio-btn d-flex align-items-center justify-content-center">
                                                 <a href="projects/uber-eats-logistics-optimization.html" class="text-decoration-none">
                                                     <div class="text-center text-light">
