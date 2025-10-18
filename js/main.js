@@ -28,14 +28,14 @@
         var typed_strings = $('.typed-text').text();
         var typed = new Typed('.typed-text-output', {
             strings: typed_strings.split(', '),
-            typeSpeed: 50,
-            backSpeed: 30,
+            typeSpeed: 80,
+            backSpeed: 50,
             smartBackspace: false,
             loop: true,
             showCursor: true,
             cursorChar: '|',
-            startDelay: 500,
-            backDelay: 1500
+            startDelay: 800,
+            backDelay: 2000
         });
     }
 
