@@ -50,7 +50,7 @@ portfolio/
 1. Créer un repository GitHub
 2. Pousser le code
 3. Activer GitHub Pages dans les settings
-4. Accéder via `https://username.github.io/repository-name`
+4. Accéder via `https://sidybadji.github.io/sidy-badji-portfolio`
 
 #### Option 2 : Netlify
 1. Connecter le repository GitHub
