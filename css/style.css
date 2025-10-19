@@ -506,6 +506,62 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Optimisations de performance pour le scroll */
+* {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+}
+
+/* Désactiver les animations pendant le scroll */
+.scrolling * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* Optimisations supplémentaires pour le scroll */
+.service-item,
+.portfolio-item,
+.project-showcase {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Réduire les animations sur mobile */
+@media (max-width: 768px) {
+  .service-item:hover,
+  .portfolio-item:hover,
+  .project-showcase:hover {
+    transform: none !important;
+  }
+  
+  .service-item i:hover,
+  .project-showcase i:hover {
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+/* Optimisation des transitions */
+.service-item,
+.portfolio-item,
+.project-showcase,
+.btn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Désactiver les animations coûteuses sur les appareils moins puissants */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* Loading Animation Enhancement */
 #spinner {
   background: var(--gradient-secondary);

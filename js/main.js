@@ -91,9 +91,35 @@
             $('.back-to-top').fadeOut('slow');
         }
     });
-    $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
-        return false;
-    });
-})(jQuery);
+            $('.back-to-top').click(function () {
+                $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+                return false;
+            });
+
+            // Optimisation du scroll - désactiver les animations pendant le scroll
+            let scrollTimer = null;
+            $(window).on('scroll', function() {
+                if (scrollTimer !== null) {
+                    clearTimeout(scrollTimer);
+                }
+                
+                // Ajouter la classe scrolling pendant le scroll
+                $('body').addClass('scrolling');
+                
+                scrollTimer = setTimeout(function() {
+                    $('body').removeClass('scrolling');
+                }, 150);
+            });
+
+            // Optimisation des animations avec requestAnimationFrame
+            function optimizeAnimations() {
+                const elements = document.querySelectorAll('.service-item, .portfolio-item, .project-showcase');
+                elements.forEach(element => {
+                    element.style.willChange = 'transform';
+                });
+            }
+            
+            // Appeler l'optimisation au chargement
+            optimizeAnimations();
+        })(jQuery);
 
