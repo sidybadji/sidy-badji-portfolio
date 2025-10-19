@@ -7,16 +7,30 @@
 
     // Fonction d'initialisation EmailJS
     function initEmailJS() {
+        console.log('Initialisation EmailJS...', {
+            serviceId: EMAILJS_SERVICE_ID,
+            templateId: EMAILJS_TEMPLATE_ID,
+            publicKey: EMAILJS_PUBLIC_KEY
+        });
+        
         // Charger EmailJS depuis CDN si pas déjà chargé
         if (typeof emailjs === 'undefined') {
+            console.log('Chargement d\'EmailJS depuis CDN...');
             const script = document.createElement('script');
             script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
             script.onload = function() {
+                console.log('EmailJS chargé, initialisation...');
                 emailjs.init(EMAILJS_PUBLIC_KEY);
+                console.log('EmailJS initialisé avec succès');
+            };
+            script.onerror = function() {
+                console.error('Erreur lors du chargement d\'EmailJS');
             };
             document.head.appendChild(script);
         } else {
+            console.log('EmailJS déjà chargé, initialisation...');
             emailjs.init(EMAILJS_PUBLIC_KEY);
+            console.log('EmailJS initialisé avec succès');
         }
     }
 
@@ -49,12 +63,20 @@
 
     // Fonction pour gérer l'envoi du formulaire
     function handleFormSubmit(event) {
+        console.log('Soumission du formulaire...');
         event.preventDefault();
         
         const form = document.getElementById('contact-form');
         const submitBtn = form.querySelector('button[type="submit"]');
         const btnText = submitBtn.querySelector('.btn-text');
         const btnLoading = submitBtn.querySelector('.btn-loading');
+        
+        console.log('Éléments du formulaire trouvés:', {
+            form: !!form,
+            submitBtn: !!submitBtn,
+            btnText: !!btnText,
+            btnLoading: !!btnLoading
+        });
         
         // Récupérer les données du formulaire
         const formData = new FormData(form);
@@ -65,13 +87,28 @@
             message: formData.get('message'),
             to_name: 'Sidy Badji'
         };
+        
+        console.log('Données du formulaire:', templateParams);
 
         // Vérifier si EmailJS est configuré
-        if (EMAILJS_SERVICE_ID === 'service_xxxxxxx' || EMAILJS_TEMPLATE_ID === 'template_xxxxxxx') {
-            // Utiliser mailto comme alternative
+        console.log('Vérification de la configuration EmailJS...');
+        if (EMAILJS_SERVICE_ID === 'service_xxxxxxx' || EMAILJS_TEMPLATE_ID === 'template_xxxxxxx' || 
+            EMAILJS_SERVICE_ID === '' || EMAILJS_TEMPLATE_ID === '' || 
+            EMAILJS_PUBLIC_KEY === 'your_public_key_here' || EMAILJS_PUBLIC_KEY === '') {
+            console.log('EmailJS non configuré, utilisation de mailto');
             handleMailtoForm(event, templateParams);
             return;
         }
+
+        // Vérifier si EmailJS est chargé
+        console.log('Vérification du chargement d\'EmailJS...', typeof emailjs);
+        if (typeof emailjs === 'undefined') {
+            console.log('EmailJS non chargé, utilisation de mailto');
+            handleMailtoForm(event, templateParams);
+            return;
+        }
+        
+        console.log('EmailJS configuré et chargé, envoi via EmailJS...');
 
         // Afficher l'état de chargement
         btnText.classList.add('d-none');
