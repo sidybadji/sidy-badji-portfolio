@@ -1,9 +1,9 @@
 // Configuration EmailJS
 (function() {
     // Remplacez ces valeurs par vos propres clés EmailJS
-    const EMAILJS_SERVICE_ID = 'service_xxxxxxx'; // À remplacer
-    const EMAILJS_TEMPLATE_ID = 'template_xxxxxxx'; // À remplacer
-    const EMAILJS_PUBLIC_KEY = 'your_public_key_here'; // À remplacer
+    const EMAILJS_SERVICE_ID = 'service_w3onej4'; // À remplacer
+    const EMAILJS_TEMPLATE_ID = 'template_qirk3ij'; // À remplacer
+    const EMAILJS_PUBLIC_KEY = 'EQUC3P9aWvw_-K-nR'; // À remplacer
 
     // Fonction d'initialisation EmailJS
     function initEmailJS() {
