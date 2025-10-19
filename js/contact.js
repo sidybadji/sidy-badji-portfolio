@@ -67,7 +67,7 @@
         event.preventDefault();
         
         const form = document.getElementById('contact-form');
-        const submitBtn = form.querySelector('button[type="submit"]');
+        const submitBtn = document.getElementById('submit-btn');
         const btnText = submitBtn.querySelector('.btn-text');
         const btnLoading = submitBtn.querySelector('.btn-loading');
         
@@ -77,6 +77,13 @@
             btnText: !!btnText,
             btnLoading: !!btnLoading
         });
+        
+        // Vérifier que tous les éléments sont trouvés
+        if (!form || !submitBtn || !btnText || !btnLoading) {
+            console.error('Éléments du formulaire manquants');
+            showMessage('Erreur: Éléments du formulaire manquants', 'danger');
+            return;
+        }
         
         // Récupérer les données du formulaire
         const formData = new FormData(form);
@@ -159,16 +166,30 @@
 
     // Initialisation quand le DOM est chargé
     document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('contact-form');
+        console.log('Initialisation du formulaire de contact...');
         
-        if (form) {
-            // Vérifier si EmailJS est configuré
-            if (EMAILJS_SERVICE_ID !== 'service_xxxxxxx' && EMAILJS_TEMPLATE_ID !== 'template_xxxxxxx') {
+        const form = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        
+        console.log('Éléments trouvés:', {
+            form: !!form,
+            submitBtn: !!submitBtn
+        });
+        
+        if (form && submitBtn) {
+            console.log('Ajout de l\'événement submit...');
+            
+            // Toujours ajouter l'événement submit
+            form.addEventListener('submit', handleFormSubmit);
+            
+            // Initialiser EmailJS si configuré
+            if (EMAILJS_SERVICE_ID !== 'service_xxxxxxx' && EMAILJS_TEMPLATE_ID !== 'template_xxxxxxx' && 
+                EMAILJS_SERVICE_ID !== '' && EMAILJS_TEMPLATE_ID !== '' && 
+                EMAILJS_PUBLIC_KEY !== 'your_public_key_here' && EMAILJS_PUBLIC_KEY !== '') {
+                console.log('EmailJS configuré, initialisation...');
                 initEmailJS();
-                form.addEventListener('submit', handleFormSubmit);
             } else {
-                // Utiliser mailto comme alternative
-                form.addEventListener('submit', handleFormSubmit);
+                console.log('EmailJS non configuré, utilisation de mailto');
             }
             
             // Améliorer l'expérience utilisateur avec les labels flottants
@@ -182,6 +203,15 @@
                     }
                 });
             });
+            
+            console.log('Formulaire de contact initialisé avec succès');
+            
+            // Test simple du bouton
+            submitBtn.addEventListener('click', function(e) {
+                console.log('Bouton cliqué !');
+            });
+        } else {
+            console.error('Formulaire ou bouton non trouvé');
         }
     });
 
