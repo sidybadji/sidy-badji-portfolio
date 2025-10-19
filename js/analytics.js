@@ -27,29 +27,43 @@
 
     // Fonction pour sauvegarder les statistiques
     function saveAnalytics(analytics) {
-        localStorage.setItem(ANALYTICS_KEY, JSON.stringify(analytics));
+        try {
+            localStorage.setItem(ANALYTICS_KEY, JSON.stringify(analytics));
+        } catch (e) {
+            console.warn('Erreur sauvegarde analytics:', e);
+        }
     }
 
     // Fonction pour générer un ID unique pour le visiteur
     function generateVisitorId() {
-        let visitorId = localStorage.getItem('visitor_id');
-        if (!visitorId) {
-            visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-            localStorage.setItem('visitor_id', visitorId);
+        try {
+            let visitorId = localStorage.getItem('visitor_id');
+            if (!visitorId) {
+                visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substring(2, 11);
+                localStorage.setItem('visitor_id', visitorId);
+            }
+            return visitorId;
+        } catch (e) {
+            console.warn('Erreur génération ID visiteur:', e);
+            return 'visitor_' + Date.now() + '_' + Math.random().toString(36).substring(2, 11);
         }
-        return visitorId;
     }
 
     // Fonction pour détecter si c'est un nouveau visiteur
     function isNewVisitor() {
-        const lastVisit = localStorage.getItem('last_visit');
-        const now = new Date().toDateString();
-        
-        if (lastVisit !== now) {
-            localStorage.setItem('last_visit', now);
-            return true;
+        try {
+            const lastVisit = localStorage.getItem('last_visit');
+            const now = new Date().toDateString();
+            
+            if (lastVisit !== now) {
+                localStorage.setItem('last_visit', now);
+                return true;
+            }
+            return false;
+        } catch (e) {
+            console.warn('Erreur localStorage:', e);
+            return true; // Considérer comme nouveau visiteur en cas d'erreur
         }
-        return false;
     }
 
     // Fonction pour obtenir les informations du navigateur
@@ -261,34 +275,38 @@
 
     // Initialisation
     document.addEventListener('DOMContentLoaded', function() {
-        // Enregistrer la visite
-        trackVisit();
-        
-        // Ajouter un bouton pour afficher les analytics (en mode développement)
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            const analyticsBtn = document.createElement('button');
-            analyticsBtn.innerHTML = '📊 Analytics';
-            analyticsBtn.style.cssText = `
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                background: #00b87b;
-                color: white;
-                border: none;
-                padding: 10px 15px;
-                border-radius: 25px;
-                cursor: pointer;
-                z-index: 9998;
-                font-size: 12px;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            `;
-            analyticsBtn.onclick = toggleDashboard;
-            document.body.appendChild(analyticsBtn);
+        try {
+            // Enregistrer la visite
+            trackVisit();
+            
+            // Ajouter un bouton pour afficher les analytics (en mode développement)
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                const analyticsBtn = document.createElement('button');
+                analyticsBtn.innerHTML = '📊 Analytics';
+                analyticsBtn.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: #00b87b;
+                    color: white;
+                    border: none;
+                    padding: 10px 15px;
+                    border-radius: 25px;
+                    cursor: pointer;
+                    z-index: 9998;
+                    font-size: 12px;
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+                `;
+                analyticsBtn.onclick = toggleDashboard;
+                document.body.appendChild(analyticsBtn);
+            }
+            
+            // Afficher les stats dans la console
+            console.log('📊 Portfolio Analytics chargé');
+            logAnalytics();
+        } catch (e) {
+            console.error('Erreur initialisation analytics:', e);
         }
-        
-        // Afficher les stats dans la console
-        console.log('📊 Portfolio Analytics chargé');
-        logAnalytics();
     });
 
     // Exposer les fonctions globalement pour debug
