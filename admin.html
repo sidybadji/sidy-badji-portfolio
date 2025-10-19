@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard - Sidy BADJI Portfolio</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .stats-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .stats-card h3 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        .stats-card p {
+            margin: 5px 0 0 0;
+            opacity: 0.9;
+        }
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .refresh-btn {
+            background: linear-gradient(135deg, #00b87b 0%, #00d4aa 100%);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,184,123,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="text-primary">
+                        <i class="fas fa-chart-line me-2"></i>Analytics Dashboard
+                    </h1>
+                    <button class="refresh-btn" onclick="refreshData()">
+                        <i class="fas fa-sync-alt me-2"></i>Actualiser
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistiques principales -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <h3 id="totalVisits">0</h3>
+                    <p><i class="fas fa-eye me-2"></i>Visites Totales</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <h3 id="uniqueVisitors">0</h3>
+                    <p><i class="fas fa-users me-2"></i>Visiteurs Uniques</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <h3 id="pageViews">0</h3>
+                    <p><i class="fas fa-file-alt me-2"></i>Pages Vues</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <h3 id="visitsToday">0</h3>
+                    <p><i class="fas fa-calendar-day me-2"></i>Aujourd'hui</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Graphiques -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <h4 class="mb-3"><i class="fas fa-mobile-alt me-2"></i>Appareils</h4>
+                    <canvas id="devicesChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <h4 class="mb-3"><i class="fas fa-external-link-alt me-2"></i>Sources de Trafic</h4>
+                    <canvas id="referrersChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pages populaires -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="table-container">
+                    <h4 class="mb-3"><i class="fas fa-star me-2"></i>Pages Populaires</h4>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Page</th>
+                                    <th>Vues</th>
+                                    <th>%</th>
+                                </tr>
+                            </thead>
+                            <tbody id="topPagesTable">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="table-container">
+                    <h4 class="mb-3"><i class="fas fa-clock me-2"></i>Visites Récentes</h4>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Heure</th>
+                                    <th>Page</th>
+                                    <th>Appareil</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentVisitsTable">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="row">
+            <div class="col-12">
+                <div class="table-container">
+                    <h4 class="mb-3"><i class="fas fa-cogs me-2"></i>Actions</h4>
+                    <div class="d-flex gap-3">
+                        <button class="btn btn-primary" onclick="exportData()">
+                            <i class="fas fa-download me-2"></i>Exporter les Données
+                        </button>
+                        <button class="btn btn-warning" onclick="resetData()">
+                            <i class="fas fa-trash me-2"></i>Reset les Données
+                        </button>
+                        <button class="btn btn-info" onclick="viewRawData()">
+                            <i class="fas fa-code me-2"></i>Voir les Données Brutes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/analytics.js"></script>
+    <script>
+        let devicesChart, referrersChart;
+
+        function refreshData() {
+            const analytics = window.PortfolioAnalytics.getStats();
+            updateStats(analytics);
+            updateCharts(analytics);
+            updateTables(analytics);
+        }
+
+        function updateStats(analytics) {
+            document.getElementById('totalVisits').textContent = analytics.totalVisits;
+            document.getElementById('uniqueVisitors').textContent = analytics.uniqueVisitors;
+            document.getElementById('pageViews').textContent = analytics.pageViews;
+            document.getElementById('visitsToday').textContent = analytics.visitsToday;
+        }
+
+        function updateCharts(analytics) {
+            // Graphique des appareils
+            const devicesCtx = document.getElementById('devicesChart').getContext('2d');
+            if (devicesChart) devicesChart.destroy();
+            
+            devicesChart = new Chart(devicesCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(analytics.devices),
+                    datasets: [{
+                        data: Object.values(analytics.devices),
+                        backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Graphique des référents
+            const referrersCtx = document.getElementById('referrersChart').getContext('2d');
+            if (referrersChart) referrersChart.destroy();
+            
+            referrersChart = new Chart(referrersCtx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(analytics.referrers),
+                    datasets: [{
+                        label: 'Visites',
+                        data: Object.values(analytics.referrers),
+                        backgroundColor: '#00b87b'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateTables(analytics) {
+            // Table des pages populaires
+            const topPagesTable = document.getElementById('topPagesTable');
+            const totalPageViews = Object.values(analytics.topPages).reduce((a, b) => a + b, 0);
+            
+            topPagesTable.innerHTML = Object.entries(analytics.topPages)
+                .sort(([,a], [,b]) => b - a)
+                .slice(0, 10)
+                .map(([page, views]) => {
+                    const percentage = totalPageViews > 0 ? ((views / totalPageViews) * 100).toFixed(1) : 0;
+                    return `
+                        <tr>
+                            <td>${page === '/' ? 'Accueil' : page}</td>
+                            <td>${views}</td>
+                            <td>${percentage}%</td>
+                        </tr>
+                    `;
+                }).join('');
+
+            // Table des visites récentes
+            const recentVisitsTable = document.getElementById('recentVisitsTable');
+            recentVisitsTable.innerHTML = analytics.visitHistory
+                .slice(-10)
+                .reverse()
+                .map(visit => {
+                    const date = new Date(visit.timestamp);
+                    return `
+                        <tr>
+                            <td>${date.toLocaleString()}</td>
+                            <td>${visit.page === '/' ? 'Accueil' : visit.page}</td>
+                            <td>${visit.device}</td>
+                        </tr>
+                    `;
+                }).join('');
+        }
+
+        function exportData() {
+            window.PortfolioAnalytics.exportData();
+        }
+
+        function resetData() {
+            if (confirm('Êtes-vous sûr de vouloir supprimer toutes les données d\'analytics ?')) {
+                localStorage.removeItem('portfolio_analytics');
+                localStorage.removeItem('visitor_id');
+                localStorage.removeItem('last_visit');
+                alert('Données supprimées !');
+                refreshData();
+            }
+        }
+
+        function viewRawData() {
+            const data = window.PortfolioAnalytics.getJSON();
+            const newWindow = window.open('', '_blank');
+            newWindow.document.write(`
+                <html>
+                    <head><title>Données Analytics Brutes</title></head>
+                    <body>
+                        <pre style="font-family: monospace; padding: 20px;">${data}</pre>
+                    </body>
+                </html>
+            `);
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshData();
+            
+            // Actualiser automatiquement toutes les 30 secondes
+            setInterval(refreshData, 30000);
+        });
+    </script>
+</body>
+</html>
