@@ -88,7 +88,7 @@
                     <!-- About Start -->
                     <section class="py-5 border-bottom wow fadeInUp" data-wow-delay="0.1s">
                         <h1 class="title pb-3 mb-5" data-fr="À Propos" data-en="About Me">À Propos</h1>
-                        <p data-fr="Data Engineer spécialisé en Python et Java, expertise dans la construction de pipelines de données et le traitement de données massives avec Spark et GCP. Solide expérience dans la conception d'architectures data, l'orchestration de workflows (Airflow), et la mise en place de pipelines ETL/ELT. Maîtrise des services GCP : BigQuery, Cloud Storage, Dataflow, Dataproc, Cloud Composer, Vertex AI, Cloud Functions et Cloud SQL." data-en="Data Engineer specialized in Python and Java, expert in building data pipelines and processing massive data with Spark and GCP. Solid experience in data architecture design, workflow orchestration (Airflow), and ETL/ELT pipeline implementation. Proficient in GCP services: BigQuery, Cloud Storage, Dataflow, Vertex AI, Cloud Functions and Cloud SQL.">Data Engineer spécialisé en Python et Java, expert dans la construction de pipelines de données et le traitement de données massives avec Spark et GCP. Solide expérience dans la conception d'architectures data, l'orchestration de workflows (Airflow), et la mise en place de pipelines ETL/ELT. Maîtrise des services GCP : BigQuery, Cloud Storage, Dataflow, Dataproc, Cloud Composer, Vertex AI, Cloud Functions et Cloud SQL.</p>
+                        <p data-fr="Data Engineer spécialisé en Python et Java, expertise dans la construction de pipelines de données et le traitement de données massives avec Spark et GCP. Solide expertise dans la conception d'architectures data, l'orchestration de workflows (Airflow), et la mise en place de pipelines ETL/ELT. Maîtrise des services GCP : BigQuery, Cloud Storage, Dataflow, Dataproc, Cloud Composer, Vertex AI, Cloud Functions et Cloud SQL." data-en="Data Engineer specialized in Python and Java, expert in building data pipelines and processing massive data with Spark and GCP. Solid experience in data architecture design, workflow orchestration (Airflow), and ETL/ELT pipeline implementation. Proficient in GCP services: BigQuery, Cloud Storage, Dataflow, Vertex AI, Cloud Functions and Cloud SQL.">Data Engineer spécialisé en Python et Java, expert dans la construction de pipelines de données et le traitement de données massives avec Spark et GCP. Solide expérience dans la conception d'architectures data, l'orchestration de workflows (Airflow), et la mise en place de pipelines ETL/ELT. Maîtrise des services GCP : BigQuery, Cloud Storage, Dataflow, Dataproc, Cloud Composer, Vertex AI, Cloud Functions et Cloud SQL.</p>
                         <p data-fr="Compétences solides en conteneurisation (Docker), développement d'APIs, gestion de bases de données et transformation de données brutes en insights business exploitables. Passionné par l'innovation technologique et l'amélioration continue des processus data." data-en="Strong skills in containerization (Docker), API development, database management and transforming raw data into actionable business insights. Passionate about technological innovation and continuous improvement of data processes.">Compétences solides en conteneurisation (Docker), développement d'APIs, gestion de bases de données et transformation de données brutes en insights business exploitables. Passionné par l'innovation technologique et l'amélioration continue des processus data.</p>
                         <div class="row mb-4">
                             <div class="col-sm-6 py-1">
@@ -847,34 +847,42 @@
                     <section class="py-5 wow fadeInUp" data-wow-delay="0.1s" id="contact">
                         <h1 class="title pb-3 mb-5" data-fr="Contactez-moi" data-en="Contact Me">Contactez-moi</h1>
 						<p class="mb-4" data-fr="Disponible immédiatement pour des missions freelance ou un poste en CDI. Basé en région parisienne avec une mobilité dans toute la région. N'hésitez pas à me contacter pour discuter de vos projets data !" data-en="Available immediately for freelance missions or permanent positions. Based in the Paris region with mobility throughout the region. Don't hesitate to contact me to discuss your data projects!">Disponible immédiatement pour des missions freelance ou un poste en CDI. Basé en région parisienne avec une mobilité dans toute la région. N'hésitez pas à me contacter pour discuter de vos projets data !</p>
-                        <form>
+                        <form id="contact-form">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control border-0 bg-secondary" id="name" placeholder="Your Name" data-fr-placeholder="Votre Nom" data-en-placeholder="Your Name">
+                                        <input type="text" class="form-control border-0 bg-secondary" id="name" name="name" placeholder="Your Name" data-fr-placeholder="Votre Nom" data-en-placeholder="Your Name" required>
                                         <label for="name" data-fr="Votre Nom" data-en="Your Name">Your Name</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="email" class="form-control border-0 bg-secondary" id="email" placeholder="Your Email" data-fr-placeholder="Votre Email" data-en-placeholder="Your Email">
+                                        <input type="email" class="form-control border-0 bg-secondary" id="email" name="email" placeholder="Your Email" data-fr-placeholder="Votre Email" data-en-placeholder="Your Email" required>
                                         <label for="email" data-fr="Votre Email" data-en="Your Email">Your Email</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control border-0 bg-secondary" id="subject" placeholder="Subject" data-fr-placeholder="Sujet" data-en-placeholder="Subject">
+                                        <input type="text" class="form-control border-0 bg-secondary" id="subject" name="subject" placeholder="Subject" data-fr-placeholder="Sujet" data-en-placeholder="Subject" required>
                                         <label for="subject" data-fr="Sujet" data-en="Subject">Subject</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <textarea class="form-control border-0 bg-secondary" placeholder="Leave a message here" id="message" style="height: 200px" data-fr-placeholder="Laissez un message ici" data-en-placeholder="Leave a message here"></textarea>
+                                        <textarea class="form-control border-0 bg-secondary" placeholder="Leave a message here" id="message" name="message" style="height: 200px" data-fr-placeholder="Laissez un message ici" data-en-placeholder="Leave a message here" required></textarea>
                                         <label for="message" data-fr="Message" data-en="Message">Message</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit" data-fr="Envoyer le Message" data-en="Send Message">Send Message</button>
+                                    <button class="btn btn-primary w-100 py-3" type="submit" data-fr="Envoyer le Message" data-en="Send Message">
+                                        <span class="btn-text">Send Message</span>
+                                        <span class="btn-loading d-none">
+                                            <i class="fas fa-spinner fa-spin me-2"></i>Envoi en cours...
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="col-12">
+                                    <div id="form-messages" class="alert d-none"></div>
                                 </div>
                             </div>
                         </form>
@@ -922,6 +930,7 @@
 
         <!-- Contact Javascript File -->
         <script src="mail/jqBootstrapValidation.min.js"></script>
+        <script src="js/contact.js"></script>
         <script src="mail/contact.js"></script>
 
         <!-- Template Javascript -->
