@@ -68,22 +68,27 @@
         
         const form = document.getElementById('contact-form');
         const submitBtn = document.getElementById('submit-btn');
-        const btnText = submitBtn.querySelector('.btn-text');
-        const btnLoading = submitBtn.querySelector('.btn-loading');
         
         console.log('Éléments du formulaire trouvés:', {
             form: !!form,
-            submitBtn: !!submitBtn,
+            submitBtn: !!submitBtn
+        });
+        
+        // Vérifier que les éléments principaux sont trouvés
+        if (!form || !submitBtn) {
+            console.error('Formulaire ou bouton non trouvé');
+            showMessage('Erreur: Formulaire non trouvé', 'danger');
+            return;
+        }
+        
+        // Trouver les éléments du bouton de manière sécurisée
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoading = submitBtn.querySelector('.btn-loading');
+        
+        console.log('Éléments du bouton trouvés:', {
             btnText: !!btnText,
             btnLoading: !!btnLoading
         });
-        
-        // Vérifier que tous les éléments sont trouvés
-        if (!form || !submitBtn || !btnText || !btnLoading) {
-            console.error('Éléments du formulaire manquants');
-            showMessage('Erreur: Éléments du formulaire manquants', 'danger');
-            return;
-        }
         
         // Récupérer les données du formulaire
         const formData = new FormData(form);
@@ -117,10 +122,11 @@
         
         console.log('EmailJS configuré et chargé, envoi via EmailJS...');
 
-        // Afficher l'état de chargement
-        btnText.classList.add('d-none');
-        btnLoading.classList.remove('d-none');
+        // Afficher l'état de chargement (de manière sécurisée)
+        if (btnText) btnText.classList.add('d-none');
+        if (btnLoading) btnLoading.classList.remove('d-none');
         submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Envoi en cours...';
 
         // Envoyer l'email via EmailJS
         emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
@@ -133,10 +139,11 @@
                 showMessage('Erreur lors de l\'envoi du message. Veuillez réessayer ou utiliser les liens de contact directs.', 'danger');
             })
             .finally(function() {
-                // Restaurer l'état du bouton
-                btnText.classList.remove('d-none');
-                btnLoading.classList.add('d-none');
+                // Restaurer l'état du bouton (de manière sécurisée)
+                if (btnText) btnText.classList.remove('d-none');
+                if (btnLoading) btnLoading.classList.add('d-none');
                 submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span class="btn-text">Send Message</span><span class="btn-loading d-none"><i class="fas fa-spinner fa-spin me-2"></i>Envoi en cours...</span>';
             });
     }
 
