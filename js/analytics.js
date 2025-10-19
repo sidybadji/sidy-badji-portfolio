@@ -69,12 +69,29 @@
     // Fonction pour obtenir les informations du navigateur
     function getBrowserInfo() {
         const userAgent = navigator.userAgent;
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
-        const isTablet = /iPad|Android(?=.*\bMobile\b)/i.test(userAgent);
+        
+        // Détection plus précise des appareils
+        const isIPad = /iPad/i.test(userAgent);
+        const isAndroidTablet = /Android/i.test(userAgent) && !/Mobile/i.test(userAgent);
+        const isTablet = isIPad || isAndroidTablet;
+        const isMobile = /Android.*Mobile|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) && !isTablet;
         
         let device = 'Desktop';
-        if (isMobile) device = 'Mobile';
-        else if (isTablet) device = 'Tablet';
+        if (isTablet) {
+            device = 'Tablet';
+        } else if (isMobile) {
+            device = 'Mobile';
+        }
+        
+        // Log pour debug
+        console.log('Device Detection:', {
+            userAgent: userAgent,
+            isMobile: isMobile,
+            isTablet: isTablet,
+            detectedDevice: device,
+            screenWidth: screen.width,
+            screenHeight: screen.height
+        });
         
         return {
             device: device,

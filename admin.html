@@ -697,6 +697,25 @@
             return 'unknown';
         }
 
+        // Fonction pour améliorer l'affichage des appareils dans les tableaux
+        function getDeviceIcon(device) {
+            switch(device) {
+                case 'Mobile':
+                    return 'mobile-alt';
+                case 'Tablet':
+                    return 'tablet-alt';
+                case 'Desktop':
+                default:
+                    return 'desktop';
+            }
+        }
+
+        // Fonction pour formater l'affichage des appareils
+        function formatDeviceDisplay(device) {
+            const icon = getDeviceIcon(device);
+            return `<i class="fas fa-${icon} me-1"></i>${device}`;
+        }
+
         function updateTables(analytics) {
             // Compter les types de visiteurs
             const visitorTypes = {
@@ -761,7 +780,7 @@
                             })}</td>
                             <td><span class="visitor-badge ${typeClass}">${typeLabel}</span></td>
                             <td>${visit.page === '/' ? 'Accueil' : visit.page}</td>
-                            <td><i class="fas fa-${visit.device === 'Mobile' ? 'mobile-alt' : visit.device === 'Tablet' ? 'tablet-alt' : 'desktop'} me-1"></i>${visit.device}</td>
+                            <td>${formatDeviceDisplay(visit.device)}</td>
                         </tr>
                     `;
                 }).join('');
@@ -794,8 +813,40 @@
             `);
         }
 
+        // Fonction de test pour la détection d'appareils
+        function testDeviceDetection() {
+            console.log('=== Test de détection d\'appareils ===');
+            const userAgent = navigator.userAgent;
+            console.log('User Agent:', userAgent);
+            
+            // Test de la logique de détection
+            const isIPad = /iPad/i.test(userAgent);
+            const isAndroidTablet = /Android/i.test(userAgent) && !/Mobile/i.test(userAgent);
+            const isTablet = isIPad || isAndroidTablet;
+            const isMobile = /Android.*Mobile|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) && !isTablet;
+            
+            console.log('Détection:', {
+                isIPad: isIPad,
+                isAndroidTablet: isAndroidTablet,
+                isTablet: isTablet,
+                isMobile: isMobile,
+                screenWidth: screen.width,
+                screenHeight: screen.height
+            });
+            
+            let device = 'Desktop';
+            if (isTablet) device = 'Tablet';
+            else if (isMobile) device = 'Mobile';
+            
+            console.log('Appareil détecté:', device);
+            return device;
+        }
+
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
+            // Test de détection d'appareils
+            testDeviceDetection();
+            
             refreshData();
             
             // Actualiser automatiquement toutes les 30 secondes
