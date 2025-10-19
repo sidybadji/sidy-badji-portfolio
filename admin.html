@@ -819,24 +819,39 @@
             const userAgent = navigator.userAgent;
             console.log('User Agent:', userAgent);
             
-            // Test de la logique de détection
-            const isIPad = /iPad/i.test(userAgent);
+            // Test de la logique de détection - même logique que analytics.js
+            const isIPhone = /iPhone/i.test(userAgent);
+            const isIPod = /iPod/i.test(userAgent);
+            const isIPad = /iPad/i.test(userAgent) && !isIPhone;
+            const isAndroidMobile = /Android.*Mobile/i.test(userAgent);
             const isAndroidTablet = /Android/i.test(userAgent) && !/Mobile/i.test(userAgent);
-            const isTablet = isIPad || isAndroidTablet;
-            const isMobile = /Android.*Mobile|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) && !isTablet;
-            
-            console.log('Détection:', {
-                isIPad: isIPad,
-                isAndroidTablet: isAndroidTablet,
-                isTablet: isTablet,
-                isMobile: isMobile,
-                screenWidth: screen.width,
-                screenHeight: screen.height
-            });
+            const isOtherMobile = /webOS|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
             
             let device = 'Desktop';
-            if (isTablet) device = 'Tablet';
-            else if (isMobile) device = 'Mobile';
+            if (isIPhone || isIPod) {
+                device = 'Mobile';
+            } else if (isAndroidMobile) {
+                device = 'Mobile';
+            } else if (isOtherMobile) {
+                device = 'Mobile';
+            } else if (isIPad) {
+                device = 'Tablet';
+            } else if (isAndroidTablet) {
+                device = 'Tablet';
+            }
+            
+            console.log('Détection:', {
+                isIPhone: isIPhone,
+                isIPod: isIPod,
+                isIPad: isIPad,
+                isAndroidMobile: isAndroidMobile,
+                isAndroidTablet: isAndroidTablet,
+                isOtherMobile: isOtherMobile,
+                detectedDevice: device,
+                screenWidth: screen.width,
+                screenHeight: screen.height,
+                touchSupport: 'ontouchstart' in window
+            });
             
             console.log('Appareil détecté:', device);
             return device;

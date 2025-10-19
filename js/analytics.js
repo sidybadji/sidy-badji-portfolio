@@ -70,27 +70,42 @@
     function getBrowserInfo() {
         const userAgent = navigator.userAgent;
         
-        // Détection plus précise des appareils
-        const isIPad = /iPad/i.test(userAgent);
+        // Détection plus précise des appareils - ordre important !
+        const isIPhone = /iPhone/i.test(userAgent);
+        const isIPod = /iPod/i.test(userAgent);
+        const isIPad = /iPad/i.test(userAgent) && !isIPhone; // iPad mais pas iPhone
+        const isAndroidMobile = /Android.*Mobile/i.test(userAgent);
         const isAndroidTablet = /Android/i.test(userAgent) && !/Mobile/i.test(userAgent);
-        const isTablet = isIPad || isAndroidTablet;
-        const isMobile = /Android.*Mobile|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) && !isTablet;
+        const isOtherMobile = /webOS|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
         
+        // Logique de détection avec priorité
         let device = 'Desktop';
-        if (isTablet) {
-            device = 'Tablet';
-        } else if (isMobile) {
+        
+        if (isIPhone || isIPod) {
             device = 'Mobile';
+        } else if (isAndroidMobile) {
+            device = 'Mobile';
+        } else if (isOtherMobile) {
+            device = 'Mobile';
+        } else if (isIPad) {
+            device = 'Tablet';
+        } else if (isAndroidTablet) {
+            device = 'Tablet';
         }
         
         // Log pour debug
         console.log('Device Detection:', {
             userAgent: userAgent,
-            isMobile: isMobile,
-            isTablet: isTablet,
+            isIPhone: isIPhone,
+            isIPod: isIPod,
+            isIPad: isIPad,
+            isAndroidMobile: isAndroidMobile,
+            isAndroidTablet: isAndroidTablet,
+            isOtherMobile: isOtherMobile,
             detectedDevice: device,
             screenWidth: screen.width,
-            screenHeight: screen.height
+            screenHeight: screen.height,
+            touchSupport: 'ontouchstart' in window
         });
         
         return {
