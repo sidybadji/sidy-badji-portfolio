@@ -9,65 +9,330 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        .stats-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        /* Variables CSS */
+        :root {
+            --primary-color: #00b87b;
+            --secondary-color: #314355;
+            --accent-color: #667eea;
+            --success-color: #4ECDC4;
+            --warning-color: #FFE66D;
+            --danger-color: #FF6B6B;
+            --info-color: #45B7D1;
+            --light-color: #F8F9FA;
+            --dark-color: #2C3E50;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --shadow-hover: 0 10px 30px rgba(0,0,0,0.2);
         }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .stats-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
         .stats-card h3 {
             font-size: 2.5rem;
-            font-weight: bold;
+            font-weight: 700;
             margin: 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
+
         .stats-card p {
-            margin: 5px 0 0 0;
+            margin: 8px 0 0 0;
             opacity: 0.9;
+            font-size: 0.95rem;
         }
+
         .chart-container {
             background: white;
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 20px;
+            padding: 25px;
             margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .table-container {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .refresh-btn {
-            background: linear-gradient(135deg, #00b87b 0%, #00d4aa 100%);
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
+            box-shadow: var(--shadow);
             transition: all 0.3s ease;
         }
-        .refresh-btn:hover {
+
+        .chart-container:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,184,123,0.3);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .table-container:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .refresh-btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--success-color) 100%);
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+        }
+
+        .refresh-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,184,123,0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .stats-card h3 {
+                font-size: 2rem;
+            }
+            
+            .stats-card {
+                padding: 20px;
+                margin-bottom: 15px;
+            }
+            
+            .chart-container,
+            .table-container {
+                padding: 20px;
+                margin-bottom: 15px;
+            }
+            
+            .container-fluid {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .stats-card h3 {
+                font-size: 1.8rem;
+            }
+            
+            .stats-card {
+                padding: 15px;
+            }
+            
+            .chart-container,
+            .table-container {
+                padding: 15px;
+            }
+        }
+
+        /* Badges pour le type de visiteur */
+        .visitor-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .visitor-recruiter {
+            background: linear-gradient(135deg, var(--info-color), #3B82F6);
+            color: white;
+        }
+
+        .visitor-company {
+            background: linear-gradient(135deg, var(--warning-color), #F59E0B);
+            color: var(--dark-color);
+        }
+
+        .visitor-individual {
+            background: linear-gradient(135deg, var(--success-color), #10B981);
+            color: white;
+        }
+
+        .visitor-unknown {
+            background: linear-gradient(135deg, #9CA3AF, #6B7280);
+            color: white;
+        }
+
+        /* Table responsive */
+        .table-responsive {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .table th {
+            background: var(--light-color);
+            border: none;
+            font-weight: 600;
+            color: var(--dark-color);
+            padding: 15px;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border: none;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .table tbody tr:hover {
+            background: #F9FAFB;
+        }
+
+        /* Header amélioré */
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--success-color));
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-radius: 0 0 30px 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .dashboard-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Cards d'actions */
+        .action-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid #E5E7EB;
+        }
+
+        .action-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .action-btn {
+            margin: 5px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--success-color));
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning-color), #F59E0B);
+            color: var(--dark-color);
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, var(--info-color), #3B82F6);
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .dashboard-header h1 {
+                font-size: 2rem;
+            }
+            
+            .dashboard-header {
+                padding: 20px 0;
+                margin-bottom: 20px;
+            }
+            
+            .action-btn {
+                width: 100%;
+                margin: 5px 0;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container-fluid py-5">
-        <div class="row">
-            <div class="col-12">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h1 class="text-primary">
-                        <i class="fas fa-chart-line me-2"></i>Analytics Dashboard
+    <!-- Header amélioré -->
+    <div class="dashboard-header">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1>
+                        <i class="fas fa-chart-line me-3"></i>Analytics Dashboard
                     </h1>
+                    <p class="mb-0 opacity-75">Suivi des visiteurs de votre portfolio professionnel</p>
+                </div>
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
                     <button class="refresh-btn" onclick="refreshData()">
                         <i class="fas fa-sync-alt me-2"></i>Actualiser
                     </button>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="container-fluid py-4">
 
         <!-- Statistiques principales -->
         <div class="row mb-4">
@@ -113,9 +378,44 @@
             </div>
         </div>
 
-        <!-- Pages populaires -->
+        <!-- Analyse des visiteurs -->
         <div class="row mb-4">
-            <div class="col-md-6">
+            <div class="col-12">
+                <div class="table-container">
+                    <h4 class="mb-3"><i class="fas fa-users me-2"></i>Analyse des Visiteurs</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-3 col-6 mb-2">
+                            <div class="text-center">
+                                <div class="visitor-badge visitor-recruiter mb-1">Recruteurs</div>
+                                <h5 id="recruiterCount" class="mb-0">0</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 mb-2">
+                            <div class="text-center">
+                                <div class="visitor-badge visitor-company mb-1">Entreprises</div>
+                                <h5 id="companyCount" class="mb-0">0</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 mb-2">
+                            <div class="text-center">
+                                <div class="visitor-badge visitor-individual mb-1">Particuliers</div>
+                                <h5 id="individualCount" class="mb-0">0</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 mb-2">
+                            <div class="text-center">
+                                <div class="visitor-badge visitor-unknown mb-1">Inconnus</div>
+                                <h5 id="unknownCount" class="mb-0">0</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pages populaires et visites récentes -->
+        <div class="row mb-4">
+            <div class="col-lg-6">
                 <div class="table-container">
                     <h4 class="mb-3"><i class="fas fa-star me-2"></i>Pages Populaires</h4>
                     <div class="table-responsive">
@@ -133,7 +433,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <div class="table-container">
                     <h4 class="mb-3"><i class="fas fa-clock me-2"></i>Visites Récentes</h4>
                     <div class="table-responsive">
@@ -141,6 +441,7 @@
                             <thead>
                                 <tr>
                                     <th>Heure</th>
+                                    <th>Type</th>
                                     <th>Page</th>
                                     <th>Appareil</th>
                                 </tr>
@@ -156,18 +457,24 @@
         <!-- Actions -->
         <div class="row">
             <div class="col-12">
-                <div class="table-container">
+                <div class="action-card">
                     <h4 class="mb-3"><i class="fas fa-cogs me-2"></i>Actions</h4>
-                    <div class="d-flex gap-3">
-                        <button class="btn btn-primary" onclick="exportData()">
-                            <i class="fas fa-download me-2"></i>Exporter les Données
-                        </button>
-                        <button class="btn btn-warning" onclick="resetData()">
-                            <i class="fas fa-trash me-2"></i>Reset les Données
-                        </button>
-                        <button class="btn btn-info" onclick="viewRawData()">
-                            <i class="fas fa-code me-2"></i>Voir les Données Brutes
-                        </button>
+                    <div class="row">
+                        <div class="col-md-4 col-12 mb-2">
+                            <button class="action-btn btn-primary w-100" onclick="exportData()">
+                                <i class="fas fa-download me-2"></i>Exporter les Données
+                            </button>
+                        </div>
+                        <div class="col-md-4 col-12 mb-2">
+                            <button class="action-btn btn-warning w-100" onclick="resetData()">
+                                <i class="fas fa-trash me-2"></i>Reset les Données
+                            </button>
+                        </div>
+                        <div class="col-md-4 col-12 mb-2">
+                            <button class="action-btn btn-info w-100" onclick="viewRawData()">
+                                <i class="fas fa-code me-2"></i>Voir les Données Brutes
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -238,7 +545,69 @@
             });
         }
 
+        // Fonction pour détecter le type de visiteur
+        function detectVisitorType(visit) {
+            const referrer = visit.referrer || '';
+            const userAgent = navigator.userAgent || '';
+            
+            // Mots-clés pour identifier les recruteurs
+            const recruiterKeywords = [
+                'linkedin', 'indeed', 'glassdoor', 'monster', 'pole-emploi', 'apec',
+                'recruteur', 'recruitment', 'talent', 'hiring', 'job', 'career',
+                'rh', 'ressources humaines', 'drh', 'talent acquisition'
+            ];
+            
+            // Mots-clés pour identifier les entreprises
+            const companyKeywords = [
+                'company', 'entreprise', 'corp', 'ltd', 'inc', 'sas', 'sarl',
+                'groupe', 'group', 'holding', 'consulting', 'solutions',
+                'technologies', 'services', 'solutions'
+            ];
+            
+            // Vérifier si c'est un recruteur
+            if (recruiterKeywords.some(keyword => 
+                referrer.toLowerCase().includes(keyword) || 
+                userAgent.toLowerCase().includes(keyword)
+            )) {
+                return 'recruiter';
+            }
+            
+            // Vérifier si c'est une entreprise
+            if (companyKeywords.some(keyword => 
+                referrer.toLowerCase().includes(keyword) || 
+                userAgent.toLowerCase().includes(keyword)
+            )) {
+                return 'company';
+            }
+            
+            // Si c'est une visite directe ou depuis un moteur de recherche, c'est probablement un particulier
+            if (referrer === 'Direct' || referrer.includes('google') || referrer.includes('bing')) {
+                return 'individual';
+            }
+            
+            return 'unknown';
+        }
+
         function updateTables(analytics) {
+            // Compter les types de visiteurs
+            const visitorTypes = {
+                recruiter: 0,
+                company: 0,
+                individual: 0,
+                unknown: 0
+            };
+            
+            analytics.visitHistory.forEach(visit => {
+                const type = detectVisitorType(visit);
+                visitorTypes[type]++;
+            });
+            
+            // Mettre à jour les compteurs de types de visiteurs
+            document.getElementById('recruiterCount').textContent = visitorTypes.recruiter;
+            document.getElementById('companyCount').textContent = visitorTypes.company;
+            document.getElementById('individualCount').textContent = visitorTypes.individual;
+            document.getElementById('unknownCount').textContent = visitorTypes.unknown;
+            
             // Table des pages populaires
             const topPagesTable = document.getElementById('topPagesTable');
             const totalPageViews = Object.values(analytics.topPages).reduce((a, b) => a + b, 0);
@@ -251,24 +620,39 @@
                     return `
                         <tr>
                             <td>${page === '/' ? 'Accueil' : page}</td>
-                            <td>${views}</td>
-                            <td>${percentage}%</td>
+                            <td><span class="badge bg-primary">${views}</span></td>
+                            <td><span class="badge bg-secondary">${percentage}%</span></td>
                         </tr>
                     `;
                 }).join('');
 
-            // Table des visites récentes
+            // Table des visites récentes avec type de visiteur
             const recentVisitsTable = document.getElementById('recentVisitsTable');
             recentVisitsTable.innerHTML = analytics.visitHistory
                 .slice(-10)
                 .reverse()
                 .map(visit => {
                     const date = new Date(visit.timestamp);
+                    const visitorType = detectVisitorType(visit);
+                    const typeClass = `visitor-${visitorType}`;
+                    const typeLabel = {
+                        'recruiter': 'Recruteur',
+                        'company': 'Entreprise',
+                        'individual': 'Particulier',
+                        'unknown': 'Inconnu'
+                    }[visitorType];
+                    
                     return `
                         <tr>
-                            <td>${date.toLocaleString()}</td>
+                            <td>${date.toLocaleString('fr-FR', { 
+                                month: 'short', 
+                                day: 'numeric', 
+                                hour: '2-digit', 
+                                minute: '2-digit' 
+                            })}</td>
+                            <td><span class="visitor-badge ${typeClass}">${typeLabel}</span></td>
                             <td>${visit.page === '/' ? 'Accueil' : visit.page}</td>
-                            <td>${visit.device}</td>
+                            <td><i class="fas fa-${visit.device === 'Mobile' ? 'mobile-alt' : visit.device === 'Tablet' ? 'tablet-alt' : 'desktop'} me-1"></i>${visit.device}</td>
                         </tr>
                     `;
                 }).join('');
